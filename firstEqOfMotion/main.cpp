@@ -30,7 +30,45 @@ void idle()
 
 /* Handler for window-repaint event. Call back when the window first appears and
    whenever the window needs to be re-painted. */
+void display()
+{
+    auto end = std::chrono::high_resolution_clock::now();
 
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+    if (duration.count() > time_value)
+    {
+        if (time_value > t)
+        {
+            cout << "value for final velocity is: " << vf;
+            cin >> t;
+            exit(0);
+        }
+        time_value++;
+        xIncrease += acceleration;
+    }
+    glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer
+    glMatrixMode(GL_MODELVIEW);   // To operate on Model-View matrix
+    glLoadIdentity();             // Reset the model-view matrix
+
+    glPushMatrix();              // Save model-view matrix setting
+    glTranslatef(x, 0.4f, 0.0f); // Translate
+                                 //    glRotatef(angle, 0.0f, 0.0f, 1.0f); // rotate by angle in degrees
+    glBegin(GL_QUADS);           // Each set of 4 vertices form a quad
+    glColor3f(1.0f, 0.0f, 0.0f); // Red
+    glVertex2f(-0.3f, -0.3f);
+    glVertex2f(0.3f, -0.3f);
+    glVertex2f(0.3f, 0.3f);
+    glVertex2f(-0.3f, 0.3f);
+    glEnd();
+    glPopMatrix(); // Restore the model-view matrix
+
+    glutSwapBuffers(); // Double buffered - swap the front and back buffers
+
+    // Change the rotational angle after each display()
+    //    angle += 0.2f;
+    x += xIncrease;
+}
 
 /* Handler for window re-size event. Called back when the window first appears and
    whenever the window is re-sized with its new width and height */
