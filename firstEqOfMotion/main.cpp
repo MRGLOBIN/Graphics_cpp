@@ -51,6 +51,16 @@ int main(int argc, char **argv)
     xIncrease = vi * 0.0001f,
     acceleration = acc * 0.0001f;
     t = tf - ti;
-
+    glutInit(&argc, argv);                           // Initialize GLUT
+    glutInitDisplayMode(GLUT_DOUBLE);                // Enable double buffered mode
+    glutInitWindowSize(1400, 720);                    // Set the window's initial width & height - non-square
+    glutInitWindowPosition(50, 50);                  // Position the window's initial top-left corner
+    glutCreateWindow("Animation via Idle Function"); // Create window with the given title
+    glutDisplayFunc(display);                        // Register callback handler for window re-paint event
+    glutReshapeFunc(reshape);                        // Register callback handler for window re-size event
+    glutIdleFunc(idle);                              // Register callback handler if no other event
+    initGL();                                        // Our own OpenGL initialization
+    glutMainLoop();                                  // Enter the infinite event-processing loop
+    cin >> t;
     return 0;
 }
