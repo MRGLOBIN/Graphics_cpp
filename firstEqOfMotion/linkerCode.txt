@@ -1,0 +1,5 @@
+-framework OpenGL -framework GLUT
+
+g++ -framework OpenGL -framework GLUT main.cpp
+
+g++ -framework OpenGL -framework GLUT -Wno-deprecated-declarations -std=c++17 main.cpp
