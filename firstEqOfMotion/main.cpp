@@ -32,6 +32,7 @@ void idle()
    whenever the window needs to be re-painted. */
 void display()
 {
+
     auto end = std::chrono::high_resolution_clock::now();
 
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
@@ -40,7 +41,7 @@ void display()
     {
         if (time_value > t)
         {
-            cout << "value for final velocity is: " << vf;
+            cout << "value for final velocity is: " << vf << "m/s";
             cin >> t;
             exit(0);
         }
@@ -100,13 +101,13 @@ void reshape(GLsizei width, GLsizei height)
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char **argv)
 {
-    cout << "please enter a intial velocity: ";
+    cout << "please enter a intial velocity(m/s): ";
     cin >> vi;
-    cout << "Please enter intial time: ";
+    cout << "Please enter intial time(s): ";
     cin >> ti;
-    cout << "please enter final time: ";
+    cout << "please enter final time(s): ";
     cin >> tf;
-    cout << "please enter acceleration of that body: ";
+    cout << "please enter acceleration of that body(m/s-2): ";
     cin >> acc;
     vf = vi + acc * (tf - ti);
     start = std::chrono::high_resolution_clock::now();
@@ -116,7 +117,7 @@ int main(int argc, char **argv)
     t = tf - ti;
     glutInit(&argc, argv);                           // Initialize GLUT
     glutInitDisplayMode(GLUT_DOUBLE);                // Enable double buffered mode
-    glutInitWindowSize(1400, 720);                    // Set the window's initial width & height - non-square
+    glutInitWindowSize(1400, 720);                   // Set the window's initial width & height - non-square
     glutInitWindowPosition(50, 50);                  // Position the window's initial top-left corner
     glutCreateWindow("Animation via Idle Function"); // Create window with the given title
     glutDisplayFunc(display);                        // Register callback handler for window re-paint event
