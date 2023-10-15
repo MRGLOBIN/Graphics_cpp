@@ -4,7 +4,8 @@
 using std::cout, std::cin;
 
 // Global variable
-// GLfloat angle = 0.0f;  // Current rotational angle of the shapes
+int option;
+
 float vi, vf, acc, ti, tf;
 GLfloat x = -1.50f,
         xIncrease,
@@ -41,7 +42,17 @@ void display()
     {
         if (time_value > t)
         {
-            cout << "value for final velocity is: " << vf << "m/s";
+            if (option == 1)
+            {
+                cout << "value for final velocity is: " << vf << "m/s";
+            }
+            else
+            {
+                float t = tf - ti;
+                float x = vi * t + 0.5f * acc * t * t;
+                cout << "Displacement of body is: "
+                     << x;
+            }
             cin >> t;
             exit(0);
         }
@@ -101,6 +112,11 @@ void reshape(GLsizei width, GLsizei height)
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char **argv)
 {
+    cout << "\t\tWelcome to Graphical representation for equation of motion\n";
+    cout << "What do you want to find: \n"
+         << "1.Final Velocity\n2.Displacement of body\n";
+    cin >> option;
+    cout << "Please provide following information of body" << std::endl;
     cout << "please enter a intial velocity(m/s): ";
     cin >> vi;
     cout << "Please enter intial time(s): ";
